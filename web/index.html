@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Nota de Bonitare</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="/eel.js"></script>
+</head>
+
+<body>
+<div class="container py-4">
+
+    <h1 class="text-center mb-4" style="color: var(--green-main);">
+        Nota de Bonitare
+    </h1>
+
+    <form action="results.html" method="GET">
+
+        <div class="accordion" id="bonitareAccordion">
+
+            <!-- SOLUL (Toate caracteristicile) -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="solul-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#solul">
+                        Solul
+                    </button>
+                </h2>
+                <div id="solul" class="accordion-collapse collapse show" data-bs-parent="#bonitareAccordion">
+                    <div class="accordion-body">
+                        <!-- Alunecări -->
+                        <div class="mb-3">
+                            <label class="form-label">Alunecări</label>
+                            <select name="alunecari" id="alunecari_input" class="form-select">
+                                <option>Absente</option>
+                                <option>Stabilizate</option>
+                                <option>Semistabilizate</option>
+                                <option>Active</option>
+                            </select>
+                        </div>
+
+                        <!-- Panta -->
+                        <div class="mb-3">
+                            <label class="form-label">Panta</label>
+                            <select name="panta" id="panta_input" class="form-select">
+                                <option>P ≤ 5%</option>
+                                <option>5% < P ≤ 10%</option>
+                                <option>10% < P ≤ 15%</option>
+                                <option>15% < P ≤ 20%</option>
+                                <option>20% < P ≤ 25%</option>
+                            </select>
+                        </div>
+
+                        <!-- Temperatura medie anuală -->
+                        <div class="mb-3">
+                            <label class="form-label">Temperatura medie anuală (°C)</label>
+                            <input required type="number" name="temperatura" id="temp_input" class="form-control" min="-50" max="50" placeholder="Ex: 12">
+                        </div>
+
+                        <!-- Precipitații -->
+                        <div class="mb-3">
+                            <label class="form-label">Precipitații (mm)</label>
+                            <input required type="number" name="precipitatii" id="prec_input" class="form-control" min="0" max="1000" placeholder="Ex: 450">
+                        </div>
+
+                        <!-- Salinizarea / Alcalizarea -->
+                        <div class="mb-3">
+                            <label class="form-label">Salinizare / Alcalizare</label>
+                            <select name="salinizare" id="sal_input" class="form-select">
+                                <option>Nesalinizat/-alcalizat</option>
+                                <option>Slab salinizat/alcalizat</option>
+                                <option>Moderat salinizat/alcalizat</option>
+                                <option>Puternic salinizat/alcalizat</option>
+                                <option>Foarte puternic salinizat/alcalizat</option>
+                            </select>
+                        </div>
+
+                        <!-- Gleizarea -->
+                        <div class="mb-3">
+                            <label class="form-label">Gleizarea</label>
+                            <select name="gleizare" id="gleizare_input" class="form-select">
+                                <option>Negleizat</option>
+                                <option>Cu gleizare în adâncime</option>
+                                <option>Gleizat slab</option>
+                                <option>Gleizat moderat</option>
+                                <option>Gleizat puternic</option>
+                                <option>Gleizat foarte puternic</option>
+                                <option>Gleizat excesiv</option>
+                                <option>Submers</option>
+                            </select>
+                        </div>
+
+                        <!-- Pseudogleizarea -->
+                        <div class="mb-3">
+                            <label class="form-label">Pseudogleizarea</label>
+                            <select name="pseudogleizare" id="pseudo_input" class="form-select">
+                                <option>Nepseudogleizat</option>
+                                <option>Cu pseudogleizare în adâncime</option>
+                                <option>Pseudogleizat slab</option>
+                                <option>Pseudogleizat moderat</option>
+                                <option>Pseudogleizat puternic</option>
+                                <option>Pseudogleizat foarte puternic</option>
+                                <option>Pseudogleizat excesiv</option>
+                            </select>
+                        </div>
+
+                        <!-- Adâncimea apelor freatice -->
+                        <div class="mb-3">
+                            <label class="form-label">Adâncimea apelor freatice</label>
+                            <select name="apa_freatica" id="freatice_input" class="form-select">
+                                <option>Superficială</option>
+                                <option>Extrem de mică</option>
+                                <option>Foarte mică</option>
+                                <option>Mică</option>
+                                <option>Mijlocie</option>
+                                <option>Mare</option>
+                                <option>Foarte mare</option>
+                                <option>Izvoare de coastă</option>
+                            </select>
+                        </div>
+
+                        <!-- Textura -->
+                        <div class="mb-3">
+                            <label class="form-label">Textura</label>
+                            <select name="textura" id="textura_input" class="form-select">
+                                <option>Nisipoasă</option>
+                                <option>Nisipo-lutoasă</option>
+                                <option>Luto-nisipoasă</option>
+                                <option>Lutoasă</option>
+                                <option>Luto-argiloasă</option>
+                                <option>Argiloasă</option>
+                                <option>Argiloasă grea</option>
+                                <option>Sedimente cu >40% CaCO3</option>
+                                <option>Roci compacte fisurate</option>
+                                <option>Roci compacte dure</option>
+                                <option>Depozite organice</option>
+                            </select>
+                        </div>
+
+                        <!-- Volumul edafic util -->
+                        <div class="mb-3">
+                            <label class="form-label">Volumul edafic util</label>
+                            <select name="edafic" id="edafic_input" class="form-select">
+                                <option>V ≤ 10%</option>
+                                <option>10% < V ≤ 20%</option>
+                                <option>20% < V ≤ 50%</option>
+                                <option>50% < V ≤ 75%</option>
+                                <option>75% < V ≤ 100%</option>
+                                <option>100% < V</option>
+                            </select>
+                        </div>
+
+                        <!-- Porozitatea -->
+                        <div class="mb-3">
+                            <label class="form-label">Porozitatea</label>
+                            <select name="porozitate" id="poro_input" class="form-select">
+                                <option>P ≥ 85%</option>
+                                <option>85% > P ≥ 75%</option>
+                                <option>75% > P ≥ 70%</option>
+                                <option>70% > P ≥ 60%</option>
+                                <option>60% > P</option>
+                            </select>
+                        </div>
+
+                        <!-- pH -->
+                        <div class="mb-3">
+                            <label class="form-label">pH</label>
+                            <select name="ph" id="ph_input" class="form-select">
+                                <option>pH ≤ 3.5</option>
+                                <option>3.5 < pH ≤ 4.3</option>
+                                <option>4.3 < pH ≤ 5.1</option>
+                                <option>5.1 < pH ≤ 5.4</option>
+                                <option>5.4 < pH ≤ 5.8</option>
+                                <option>5.8 < pH ≤ 6.4</option>
+                                <option>6.4 < pH ≤ 6.8</option>
+                                <option>6.8 < pH ≤ 7.2</option>
+                                <option>7.2 < pH ≤ 7.8</option>
+                                <option>7.8 < pH ≤ 8.4</option>
+                                <option>8.4 < pH ≤ 9</option>
+                                <option>9 < pH ≤ 9.4</option>
+                                <option>9.4 < pH ≤ 10</option>
+                                <option>pH > 10</option>
+                            </select>
+                        </div>
+
+                        <!-- Rezerva de humus -->
+                        <div class="mb-3">
+                            <label class="form-label">Rezerva de humus</label>
+                            <select name="humus" id="humus_input" class="form-select">
+                                <option>&lt; 30</option>
+                                <option>30 ≤ H &lt; 60</option>
+                                <option>60 ≤ H &lt; 120</option>
+                                <option>120 ≤ H &lt; 160</option>
+                                <option>160 ≤ H &lt; 200</option>
+                                <option>200 ≤ H &lt; 250</option>
+                                <option>250 ≤ H &lt; 300</option>
+                                <option>300 ≤ H &lt; 400</option>
+                                <option>400 ≤ H &lt; 600</option>
+                                <option>H ≥ 600</option>
+                            </select>
+                        </div>
+
+                        <!-- Conținutul de carbonați -->
+                        <div class="mb-3">
+                            <label class="form-label">Conținutul de carbonați</label>
+                            <select name="carb" id="carb_input" class="form-select">
+                                <option>CaCO3 ≤ 4</option>
+                                <option>4 < CaCO3 ≤ 8</option>
+                                <option>8 < CaCO3 ≤ 12</option>
+                                <option>12 < CaCO3 ≤ 15</option>
+                                <option>15 < CaCO3 ≤ 20</option>
+                                <option>20 < CaCO3 ≤ 25</option>
+                                <option>CaCO3 > 40</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPECIFICAȚII -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#specificatii">
+                        Specificații
+                    </button>
+                </h2>
+                <div id="specificatii" class="accordion-collapse collapse" data-bs-parent="#bonitareAccordion">
+                    <div class="accordion-body">
+                        <!-- Orientarea -->
+                        <div class="mb-3">
+                            <label class="form-label">Orientarea</label>
+                            <select name="orientare" id="orient_input" class="form-select">
+                                <option>N</option>
+                                <option>E</option>
+                                <option>S</option>
+                                <option>V</option>
+                            </select>
+                        </div>
+
+                        <!-- Drenaj și/sau desecare -->
+                        <div class="mb-3">
+                            <label class="form-label">Drenaj / Desecare</label>
+                            <select name="drenaj" id="drenaj_input" class="form-select">
+                                <option>Da</option>
+                                <option>Nu</option>
+                            </select>
+                        </div>
+
+                        <!-- Adâncimea saturației -->
+                        <div class="mb-3">
+                            <label class="form-label">Adâncimea saturației</label>
+                            <select name="saturatie" id="saturatie_input" class="form-select">
+                                <option>Grad de saturație în primii 20 cm / Ap > 55%</option>
+                                <option>Grad de saturație în primii 20 cm / Ap < 55%</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- end accordion -->
+
+        <!-- BOTTOM BAR -->
+        <div class="bottom-bar">
+            <!-- Buton Calculează (fix) -->
+            <button type="submit" class="btn-green">Calculează</button>
+        
+        </div>
+        
+
+    </form>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
