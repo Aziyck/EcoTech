@@ -28,7 +28,7 @@ html,
 body {
     background: var(--bg-main);
     color: var(--text-main);
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -213,6 +213,10 @@ body::-webkit-scrollbar {
         gap: 1.2rem;
     }
 
+    #collapseResults .accordion-body{
+        display: flex;
+    }
+
     .container {
         max-width: 1000px;
     }
@@ -227,4 +231,150 @@ body::-webkit-scrollbar {
     .accordion-body {
         display: block;
     }
+}
+
+
+
+
+
+#podiumRow {
+    display: flex;
+    justify-content: center;  /* centrare orizontală */
+    align-items: flex-end;    /* toate cardurile aliniază la baza lor */
+    gap: 1.5rem;              /* spațiu între podiumuri */
+    margin-bottom: 3rem;
+}
+
+.podium-card {
+    border-radius: var(--border-radius);
+    padding: 1.2rem 1rem;
+    color: white;
+    text-align: center;
+    width: 120px;
+    transition: transform 0.2s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* textul la baza cardului */
+    align-items: center;
+    overflow-wrap: break-word; /* permite împachetarea textului lung */
+}
+
+.podium-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Culori și înălțimi */
+.podium-card.gold {
+    background-color: #ffd700;
+    height: 200px; /* cel mai înalt */
+}
+.podium-card.silver {
+    background-color: #c0c0c0;
+    height: 160px;
+}
+.podium-card.bronze {
+    background-color: #cd7f32;
+    height: 140px;
+}
+
+/* Badge */
+.podium-card .badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background-color: rgba(0,0,0,0.2);
+    color: white;
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+/* Tabel modern */
+#resultsContainer thead {
+    border-radius: var(--border-radius);
+    background-color: var(--green-main); /* sau #27ae60 dacă vrei mai închis */
+}
+
+#resultsContainer thead th {
+    background-color:  var(--green-main);       /* text alb */
+    color: white;
+    text-align: center; /* centrat */
+    font-weight: 600;   /* optional, mai bold */
+}
+
+#resultsContainer tbody td {
+    text-align: center;
+}
+
+
+.table-row-clickable {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.table-row-clickable:hover {
+    background-color: rgba(46, 204, 113, 0.1); /* verde deschis pentru hover */
+}
+
+.table-row-detail td {
+    background-color: #f1fdf3; /* verde deschis pentru detalii */
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.collapse {
+    transition: height 0.35s ease;
+}
+
+.table tbody tr td > .collapse {
+    padding: 0;
+}
+
+/* optional: td-ul in sine sa nu aiba inaltime vizibila */
+.table tbody tr.detail-row td {
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    margin-right: 16px;
+    font-size: 1.25em;
+    font-weight: 900;
+}
+
+
+/* Stil separat pentru butonul de back, nu preia padding-ul din bottom-bar */
+.btn-back {
+    background: var(--green-main);
+    color: white;
+    border-radius: var(--border-radius);
+    font-size: 1.15rem;
+    font-weight: 600;
+    border: none;
+    padding: 8px 32px;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Săgeata > */
+.btn-back .back-arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-weight: 900;
+    font-size: 1.5em;
+    line-height: 0;
+    padding-right: 4px;
+}
+
+.btn-back:hover {
+    background: var(--green-dark);
+    transform: scale(1.03);
+}
+
+.btn-green:hover .back-arrow {
+    transform: translateX(-6px);
 }

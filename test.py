@@ -1,9 +1,9 @@
-from helpers import read_excel_one_lvl, print_dict_subset, read_excel_double_lvl, read_temp_tabl, read_culturi_values
+from helpers import read_excel_one_lvl, print_dict_subset, read_excel_double_lvl, read_temp_tabl, read_culturi_values, return_note_de_bonitare_dict
 
 file_path = "data.xlsx"
 
-culturi = read_culturi_values(file_path, "Sheet1")
-print(culturi)
+culturi, _ = read_culturi_values(file_path, "Sheet1")
+# print(culturi)
 
 # ------------------
 alunecari_dict, _ = read_excel_one_lvl(file_path, "Alunecări")
@@ -93,8 +93,15 @@ for c in culturi:
     rez_dict[c]["salin_alcalin"] = salin_and_alc_dict.get(c, {}).get(salin_alcalin, None)
     rez_dict[c]["pseoudoglizare"] = pseudogleiz_dict.get(c, {}).get(pseudoglizare, None)
     rez_dict[c]["ph"] = ph_dict.get(c, {}).get(adancimea_sat, {}).get(ph, None)
-    rez_dict[c]["carb"] = carb_dict.get(c, {}).get(carb, None)
+    rez_dict[c]["carb"] = carb_dict.get(c, {}).get(carb, None)    
+
+for cultura, valori in rez_dict.items():
+    coeficienti = [v for v in valori.values() if isinstance(v, (int, float))]
+    general = 1
+    for c in coeficienti:
+        general *= c
     
+    rez_dict[cultura]["general"] = general
 
 # print (rez_dict["PS"]["alunecari"]) 
 # print (rez_dict["PS"]["panta"]) 
@@ -103,6 +110,7 @@ for c in culturi:
 #     for col_name, col_value in values.items():
 #         print(key, col_name, col_value)
 
-print_dict_subset(rez_dict, 3)
+print_dict_subset(return_note_de_bonitare_dict(), 30)
+
 
 
