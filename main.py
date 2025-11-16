@@ -1,11 +1,7 @@
 import eel
-from helpers import return_note_de_bonitare_dict
+from helpers import return_note_de_bonitare_dict, print_dict_subset
 
 eel.init("web")
-
-@eel.expose
-def calculeaza(panta, temperatura):
-    return f"Rezultat: {panta}, {temperatura}°C"
 
 @eel.expose
 def calc_note_de_bonitare_dict(data):
@@ -16,8 +12,8 @@ def calc_note_de_bonitare_dict(data):
     data['panta'] = data['panta'].replace(" ", "")
     data['ph'] = data['ph'].replace(" ", "").replace(".",",")
     data['carb'] = data['carb'].replace(" ", "")
-    data['porozitateb'] = data['porozitate'].replace(" ", "")
-    print(data)
+    data['porozitate'] = data['porozitate'].replace(" ", "")
+    print_dict_subset(data, 100)
 
     # Aici poți calcula nota de bonitare
     # ...
@@ -28,7 +24,11 @@ def calc_note_de_bonitare_dict(data):
                                         pseudogleizare=data['pseudogleizare'],
                                         ph=data['ph'],
                                         carb=data['carb'])
-    print(rez_dict)
+    
+    rez_dict = {key[4:-1]: value for key, value in rez_dict.items()}
+
+    print("\nExtrase din data.xlsx:")
+    print_dict_subset(rez_dict, 5)
 
     return rez_dict
 

@@ -156,9 +156,6 @@ def return_note_de_bonitare_dict(
     """
 
     culturi, culturi_full = read_culturi_values(file_path, "Sheet1")
-
-    print(culturi)
-    print(culturi_full)
     
     # ------------------
     alunecari_dict, _ = read_excel_one_lvl(file_path, "Alunecări")
@@ -257,6 +254,7 @@ def return_note_de_bonitare_dict(
             general *= c
         
         rez_dict[cultura]["general"] = round(general,2)
+
 
     rez_dict = { full: rez_dict[short] for short, full in zip(culturi, culturi_full) }
 

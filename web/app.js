@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        console.log("DATE TRIMISE:", data);
+        // console.log("DATE TRIMISE:", data);
 
         // Trimitem către Python
         const result = await eel.calc_note_de_bonitare_dict(data)();

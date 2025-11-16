@@ -13,11 +13,12 @@
     --text-input: #0c0c0c;
     /* text input mai vizibil */
 
-    --green-main: #2ecc71;
+    --green-main: #4cb93a;
+    --green-secondary: hsl(111, 62%, 88%);
     /* pentru buton */
     --green-dark: #27ae60;
 
-    --bottom-bar-bg: #d8ecde;
+    --bottom-bar-bg: #bfeccd;
     /* bara fixa jos, alta culoare decat green */
 
     --border-radius: 12px;
@@ -97,6 +98,11 @@ body::-webkit-scrollbar {
     border-radius: var(--border-radius) !important;
     font-weight: 600;
     transition: 0.2s;
+}
+
+.accordion-button {
+    background: var(--green-secondary);
+    color: black;
 }
 
 .accordion-button:not(.collapsed) {
