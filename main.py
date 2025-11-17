@@ -21,14 +21,21 @@ def calc_note_de_bonitare_dict(data):
     rez_dict = return_note_de_bonitare_dict(alunecari=data['alunecari'],
                                         panta=data['panta'],
                                         salin_alcalin=data['salinizare'],
+                                        gleizare=data['gleizare'],
                                         pseudogleizare=data['pseudogleizare'],
+                                        adancirea_apelor_freatice=data['apa_freatica'],
+                                        textura=data['textura'],
+                                        porozitatea=data['porozitate'],
                                         ph=data['ph'],
-                                        carb=data['carb'])
+                                        carb=data['carb'],
+                                        rezerva_de_humus=data['humus'],
+                                        drenaj_desecare=data['drenaj'],
+                                        adancimea_sat=data['saturatie'])
     
     rez_dict = {key[4:-1]: value for key, value in rez_dict.items()}
 
     print("\nExtrase din data.xlsx:")
-    print_dict_subset(rez_dict, 5)
+    print_dict_subset(rez_dict, 1)
 
     return rez_dict
 

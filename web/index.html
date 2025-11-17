@@ -141,17 +141,17 @@
                             <div class="mb-3">
                                 <label class="form-label">Textura</label>
                                 <select name="textura" id="textura_input" class="form-select">
-                                    <option>Nisipoasă</option>
-                                    <option>Nisipo-lutoasă</option>
-                                    <option>Luto-nisipoasă</option>
-                                    <option>Lutoasă</option>
-                                    <option>Luto-argiloasă</option>
-                                    <option>Argiloasă</option>
-                                    <option>Argiloasă grea</option>
-                                    <option>Sedimente cu >40% CaCO3</option>
-                                    <option>Roci compacte fisurate</option>
-                                    <option>Roci compacte dure</option>
-                                    <option>Depozite organice</option>
+                                    <option value="Nisipoasă (≥90% 0,01mm+)">Nisipoasă</option>
+                                    <option value="Nisipo-lutoasă (≥80% 0,01mm+)">Nisipo-lutoasă</option>
+                                    <option value="Luto-nisipoasă (≥70% 0,01mm+)">Luto-nisipoasă</option>
+                                    <option value="Lutoasă (≥55% 0,01mm+)">Lutoasă</option>
+                                    <option value="Luto-argiloasă (≥35% 0,01mm+)">Luto-argiloasă</option>
+                                    <option value="Argiloasă (≥15% 0,01mm+)">Argiloasă</option>
+                                    <option value="Argiloasă grea (<15% 0,01mm+)">Argiloasă grea</option>
+                                    <option value="Sedimente cu >40% CaCO3">Sedimente cu >40% CaCO3</option>
+                                    <option value="Roci compacte fisurate și pietrișuri">Roci compacte fisurate</option>
+                                    <option value="Roci compacte dure și impermeabile">Roci compacte dure</option>
+                                    <option value="Depozite organice">Depozite organice</option>
                                 </select>
                             </div>
 
@@ -261,8 +261,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Drenaj / Desecare</label>
                                 <select name="drenaj" id="drenaj_input" class="form-select">
-                                    <option>Da</option>
                                     <option>Nu</option>
+                                    <option>Da</option>
                                 </select>
                             </div>
 
@@ -270,8 +270,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Adâncimea saturației</label>
                                 <select name="saturatie" id="saturatie_input" class="form-select">
-                                    <option>Grad de saturație în primii 20 cm / Ap > 55%</option>
-                                    <option>Grad de saturație în primii 20 cm / Ap < 55%</option>
+                                    <option value="Soluri cu grad de saturație în primii 20 de cm sau în Ap>55%">Grad de saturație în primii 20 cm / Ap > 55%</option>
+                                    <option value="Soluri cu grad de saturație în primii 20 de cm sau în Ap<55%">Grad de saturație în primii 20 cm / Ap < 55%</option>
                                 </select>
                             </div>
                         </div>

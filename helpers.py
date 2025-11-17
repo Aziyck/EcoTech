@@ -147,9 +147,16 @@ def return_note_de_bonitare_dict(
         alunecari = "Absente",
         panta = "10%<P≤15%",
         salin_alcalin = "Slab salinizat/alcalizat",
+        gleizare = "Submers",
         pseudogleizare = "Nepseudogleizat",
+        adancirea_apelor_freatice = "Mijlocie",
+        textura = "Lutoasă (≥55% 0,01mm+)",
+        porozitatea = "P≥85%",
         ph = "pH≤3,5",
-        carb = "CaCO3≤4"):
+        carb = "CaCO3≤4",
+        rezerva_de_humus = "160≤H<200",
+        drenaj_desecare = "Nu",
+        adancimea_sat = "Soluri cu grad de saturație în primii 20 de cm sau în Ap>55%"):
     """
     Returneaza dictionarul cu nota de bonitare calculata in cultura -> general
     si restul coeficientilor care au intervenit in calulul acestora
@@ -183,7 +190,7 @@ def return_note_de_bonitare_dict(
     # print_dict_subset(salin_and_alc_dict)
 
     # # ------------------
-    # gleuiz_dict, _ = read_excel_double_lvl(file_path, "Gleizarea")
+    gleuiz_dict, _ = read_excel_double_lvl(file_path, "Gleizarea")
     # print_dict_subset(gleuiz_dict)
 
     # # ------------------
@@ -191,11 +198,11 @@ def return_note_de_bonitare_dict(
     # print_dict_subset(pseudogleiz_dict)
 
     # # ------------------
-    # adanc_ap_freat_dict, _ = read_excel_double_lvl(file_path, "Adâncimea apelor freatice", drop_empty_columns=True)
+    adanc_ap_freat_dict, _ = read_excel_double_lvl(file_path, "Adâncimea apelor freatice", drop_empty_columns=True)
     # print_dict_subset(adanc_ap_freat_dict)
 
     # # ------------------
-    # textur_dict, _ = read_excel_double_lvl(file_path, "Textura",skip_rows=1)
+    textur_dict, _ = read_excel_double_lvl(file_path, "Textura",skip_rows=1)
     # print_dict_subset(textur_dict)
 
     # # ------------------
@@ -203,7 +210,7 @@ def return_note_de_bonitare_dict(
     # print_dict_subset(vol_edafil_util_dict)
 
     # # ------------------
-    # porozitatea_dict, _ = read_excel_double_lvl(file_path, "Porozitatea",skip_rows=1)
+    porozitatea_dict, _ = read_excel_double_lvl(file_path, "Porozitatea",skip_rows=1)
     # print_dict_subset(porozitatea_dict)
 
     # # ------------------
@@ -211,14 +218,14 @@ def return_note_de_bonitare_dict(
     # print_dict_subset(ph_dict)
 
     # # ------------------
-    # rezeva_de_humus_dict, _ = read_excel_double_lvl(file_path, "Rezerva de humus",skip_rows=1)
+    rezerva_de_humus_dict, _ = read_excel_double_lvl(file_path, "Rezerva de humus",skip_rows=1)
     # print_dict_subset(rezeva_de_humus_dict)
 
     # # ------------------
     carb_dict, _ = read_excel_one_lvl(file_path, "Conținutul de carbonați")
     # print_dict_subset(carb_dict)
 
-    adancimea_sat = "Soluri cu grad de saturație în primii 20 de cm sau în Ap>55%"
+
 
     # alunecari = "Absente"
     # panta = "10%<P≤15%"
@@ -237,15 +244,63 @@ def return_note_de_bonitare_dict(
 
     # porozitate?
 
+
+    adanc_apa_texture_mapping_dict = {
+        "Nisipoasă (≥90% 0,01mm+)" : "Grosieră",
+        "Nisipo-lutoasă (≥80% 0,01mm+)" : "Grosieră",
+        "Luto-nisipoasă (≥70% 0,01mm+)" : "Mijlocie",
+        "Luto-argiloasă (≥35% 0,01mm+)" : "Mijlocie",
+    }
+    textura_argument_adanc_apa = adanc_apa_texture_mapping_dict.get(textura, "Fină")
+
+    porozitate_textura_mapping_dict = {
+        "75%>P≥70%" : "Soluri cu porozitate mică - mijlocie",
+        "70%>P≥60%" : "Soluri cu porozitate mică - mijlocie",
+        "60%>P" : "Soluri cu porozitate mică - mijlocie"
+    }
+    potozitate_argument_textura = porozitate_textura_mapping_dict.get(porozitatea, "Soluri cu porozitate normală - extrem de mare")
+
+    textura_porozitate_mapping_dict = {
+        "Nisipoasă (≥90% 0,01mm+)": "Soluri cu altă textură, decât fină",
+        "Nisipo-lutoasă (≥80% 0,01mm+)": "Soluri cu altă textură, decât fină",
+        "Luto-nisipoasă (≥70% 0,01mm+)": "Soluri cu altă textură, decât fină",
+        "Lutoasă (≥55% 0,01mm+)": "Soluri cu altă textură, decât fină",
+        "Sedimente cu >40% CaCO3": "Soluri cu altă textură, decât fină",
+        "Roci compacte fisurate și pietrișuri": "Soluri cu altă textură, decât fină",
+        "Roci compacte dure și impermeabile": "Soluri cu altă textură, decât fină"
+    }
+    textura_argument_potozitate = textura_porozitate_mapping_dict.get(textura, "Soluri cu textură fină")
+
+    textura_humus_mapping_dict = {
+        "Luto-nisipoasă (≥70% 0,01mm+)": "Soluri cu textură fină și mijlocie",
+        "Lutoasă (≥55% 0,01mm+)": "Soluri cu textură fină și mijlocie",
+        "Luto-argiloasă (≥35% 0,01mm+)": "Soluri cu textură fină și mijlocie",
+        "Argiloasă (≥15% 0,01mm+)": "Soluri cu textură fină și mijlocie",
+        "Argiloasă grea (<15% 0,01mm+)": "Soluri cu textură fină și mijlocie",
+        "Depozite organice": "Soluri cu textură fină și mijlocie"
+    }
+    textura_argument_humus = textura_humus_mapping_dict.get(textura, "Soluri cu textură grosieră")
+
+    drenaj_mapping_dict = {
+        "Da": "Gradul de gleizare artificială",
+        "Nu": "Gradul de gleizare naturală"
+    }
+    drenaj_desecare = drenaj_mapping_dict[drenaj_desecare]
+
     rez_dict = {}
     for c in culturi:
         rez_dict[c] = {}
         rez_dict[c]["alunecari"] = alunecari_dict.get(c, {}).get(alunecari, None)
         rez_dict[c]["panta"] = panta_dict.get(c, {}).get(panta, None)
         rez_dict[c]["salin_alcalin"] = salin_and_alc_dict.get(c, {}).get(salin_alcalin, None)
+        rez_dict[c]["gleizare"] = gleuiz_dict.get(c, {}).get(drenaj_desecare, {}).get(gleizare, None)
         rez_dict[c]["pseoudoglizare"] = pseudogleiz_dict.get(c, {}).get(pseudogleizare, None)
+        rez_dict[c]["adancirea_apelor_freatice"] = adanc_ap_freat_dict.get(c, {}).get(textura_argument_adanc_apa, {}).get(adancirea_apelor_freatice, None)
+        rez_dict[c]["textura"] = textur_dict.get(c, {}).get(potozitate_argument_textura, {}).get(textura, None)
+        rez_dict[c]["porozitate"] = porozitatea_dict.get(c, {}).get(textura_argument_potozitate, {}).get(porozitatea, None)
         rez_dict[c]["ph"] = ph_dict.get(c, {}).get(adancimea_sat, {}).get(ph, None)
-        rez_dict[c]["carb"] = carb_dict.get(c, {}).get(carb, None)    
+        rez_dict[c]["rezerva_de_humus"] = rezerva_de_humus_dict.get(c, {}).get(textura_argument_humus, {}).get(rezerva_de_humus, None)
+        rez_dict[c]["carbonati"] = carb_dict.get(c, {}).get(carb, None)    
 
     for cultura, valori in rez_dict.items():
         coeficienti = [v for v in valori.values() if isinstance(v, (int, float))]

@@ -95,6 +95,7 @@ for c in culturi:
     rez_dict[c]["ph"] = ph_dict.get(c, {}).get(adancimea_sat, {}).get(ph, None)
     rez_dict[c]["carb"] = carb_dict.get(c, {}).get(carb, None)    
 
+
 for cultura, valori in rez_dict.items():
     coeficienti = [v for v in valori.values() if isinstance(v, (int, float))]
     general = 1

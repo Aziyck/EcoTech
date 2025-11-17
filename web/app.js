@@ -103,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // ASCUNDE FORMULAR
         form.style.display = "none";
         container.style.display = "none";
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     const backBtn = document.getElementById("backToCalc");
@@ -122,6 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Golim tabelul (opțional)
         document.getElementById("resultsTableBody").innerHTML = "";
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
 
