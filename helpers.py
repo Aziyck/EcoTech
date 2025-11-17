@@ -146,20 +146,24 @@ def return_note_de_bonitare_dict(
         file_path="data.xlsx", 
         alunecari = "Absente",
         panta = "10%<P≤15%",
+        temperatura = 10.25,
+        precipitatii = 655,
         salin_alcalin = "Slab salinizat/alcalizat",
         gleizare = "Submers",
         pseudogleizare = "Nepseudogleizat",
         adancirea_apelor_freatice = "Mijlocie",
         textura = "Lutoasă (≥55% 0,01mm+)",
+        volum_endafilic_util = "75%<V≤100%",
         porozitatea = "P≥85%",
         ph = "pH≤3,5",
         carb = "CaCO3≤4",
         rezerva_de_humus = "160≤H<200",
+        orinetarea = "S",
         drenaj_desecare = "Nu",
         adancimea_sat = "Soluri cu grad de saturație în primii 20 de cm sau în Ap>55%"):
     """
     Returneaza dictionarul cu nota de bonitare calculata in cultura -> general
-    si restul coeficientilor care au intervenit in calulul acestora
+    si restul coeficientilor care au intervenit in calculul acestora
     """
 
     culturi, culturi_full = read_culturi_values(file_path, "Sheet1")
@@ -206,7 +210,7 @@ def return_note_de_bonitare_dict(
     # print_dict_subset(textur_dict)
 
     # # ------------------
-    # vol_edafil_util_dict, _ = read_excel_double_lvl(file_path, "Volumul edafic util",skip_rows=1)
+    vol_edafil_util_dict, _ = read_excel_double_lvl(file_path, "Volumul edafic util",skip_rows=1)
     # print_dict_subset(vol_edafil_util_dict)
 
     # # ------------------
@@ -225,24 +229,8 @@ def return_note_de_bonitare_dict(
     carb_dict, _ = read_excel_one_lvl(file_path, "Conținutul de carbonați")
     # print_dict_subset(carb_dict)
 
-
-
-    # alunecari = "Absente"
-    # panta = "10%<P≤15%"
     # temp?
     # precip?
-    # salin_alcalin = "Slab salinizat/alcalizat"
-    # glizare?
-    # pseudoglizare = "Nepseudogleizat"
-    # apre_freatice?
-    # vol_edafil_util?
-    # tetura?
-    # ph = "pH≤3,5"
-    # rezeva_de_humus?
-    # carb = "CaCO3≤4"
-
-
-    # porozitate?
 
 
     adanc_apa_texture_mapping_dict = {
@@ -281,6 +269,10 @@ def return_note_de_bonitare_dict(
     }
     textura_argument_humus = textura_humus_mapping_dict.get(textura, "Soluri cu textură grosieră")
 
+    precipitatii_argument_volum_endafilic = "Precipitații medii anuale <600"
+    if(precipitatii >= 600):
+        precipitatii_argument_volum_endafilic = "Precipitații medii anuale ≥600"
+
     drenaj_mapping_dict = {
         "Da": "Gradul de gleizare artificială",
         "Nu": "Gradul de gleizare naturală"
@@ -297,6 +289,7 @@ def return_note_de_bonitare_dict(
         rez_dict[c]["pseoudoglizare"] = pseudogleiz_dict.get(c, {}).get(pseudogleizare, None)
         rez_dict[c]["adancirea_apelor_freatice"] = adanc_ap_freat_dict.get(c, {}).get(textura_argument_adanc_apa, {}).get(adancirea_apelor_freatice, None)
         rez_dict[c]["textura"] = textur_dict.get(c, {}).get(potozitate_argument_textura, {}).get(textura, None)
+        rez_dict[c]["volumul_edaficil_util"] = vol_edafil_util_dict.get(c, {}).get(precipitatii_argument_volum_endafilic, {}).get(volum_endafilic_util, None)
         rez_dict[c]["porozitate"] = porozitatea_dict.get(c, {}).get(textura_argument_potozitate, {}).get(porozitatea, None)
         rez_dict[c]["ph"] = ph_dict.get(c, {}).get(adancimea_sat, {}).get(ph, None)
         rez_dict[c]["rezerva_de_humus"] = rezerva_de_humus_dict.get(c, {}).get(textura_argument_humus, {}).get(rezerva_de_humus, None)

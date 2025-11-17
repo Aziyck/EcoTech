@@ -71,14 +71,14 @@
                             <div class="mb-3">
                                 <label class="form-label">Temperatura medie anuală (°C)</label>
                                 <input required type="number" name="temperatura" id="temp_input" class="form-control"
-                                    min="-50" max="50" placeholder="Ex: 12">
+                                    min="-50" max="50" step="0.01" placeholder="Ex: 10.25">
                             </div>
 
                             <!-- Precipitații -->
                             <div class="mb-3">
                                 <label class="form-label">Precipitații (mm)</label>
                                 <input required type="number" name="precipitatii" id="prec_input" class="form-control"
-                                    min="0" max="1000" placeholder="Ex: 450">
+                                    min="250" max="900" step="1" placeholder="Ex: 655">
                             </div>
 
                             <!-- Salinizarea / Alcalizarea -->
@@ -250,9 +250,9 @@
                             <div class="mb-3">
                                 <label class="form-label">Orientarea</label>
                                 <select name="orientare" id="orient_input" class="form-select">
+                                    <option>S</option>
                                     <option>N</option>
                                     <option>E</option>
-                                    <option>S</option>
                                     <option>V</option>
                                 </select>
                             </div>

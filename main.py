@@ -13,6 +13,8 @@ def calc_note_de_bonitare_dict(data):
     data['ph'] = data['ph'].replace(" ", "").replace(".",",")
     data['carb'] = data['carb'].replace(" ", "")
     data['porozitate'] = data['porozitate'].replace(" ", "")
+    data['precipitatii'] = int(data['precipitatii'])
+    data['temperatura'] = float(data['temperatura'])
     print_dict_subset(data, 100)
 
     # Aici poți calcula nota de bonitare
@@ -20,15 +22,19 @@ def calc_note_de_bonitare_dict(data):
     # Întoarce dictul final
     rez_dict = return_note_de_bonitare_dict(alunecari=data['alunecari'],
                                         panta=data['panta'],
+                                        temperatura=data['temperatura'],
+                                        precipitatii=data['precipitatii'],
                                         salin_alcalin=data['salinizare'],
                                         gleizare=data['gleizare'],
                                         pseudogleizare=data['pseudogleizare'],
                                         adancirea_apelor_freatice=data['apa_freatica'],
                                         textura=data['textura'],
+                                        volum_endafilic_util=data['edafic'],
                                         porozitatea=data['porozitate'],
                                         ph=data['ph'],
                                         carb=data['carb'],
                                         rezerva_de_humus=data['humus'],
+                                        orinetarea=data['orientare'],
                                         drenaj_desecare=data['drenaj'],
                                         adancimea_sat=data['saturatie'])
     
