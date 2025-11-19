@@ -186,7 +186,7 @@ def return_note_de_bonitare_dict(
     # print(temp_arr)
 
     # # ------------------
-    # precip_dict, _ = read_excel_double_lvl(file_path, "Precipitații")
+    precip_dict, _ = read_excel_double_lvl(file_path, "Precipitații")
     # print_dict_subset(precip_dict)
 
     # # ------------------
@@ -279,11 +279,17 @@ def return_note_de_bonitare_dict(
     }
     drenaj_desecare = drenaj_mapping_dict[drenaj_desecare]
 
+    temperatura_argument_precipitatii = "Precipitații, mm (≥10° temp. an. med.)"
+    if(temperatura < 10): temperatura_argument_precipitatii = "Precipitații, mm (8<X<10° temp. an. med.)"
+    if(temperatura <= 8): temperatura_argument_precipitatii = "Precipitații, mm (≤8° temp. an. med.)"
+    precipitatii_corectate = min({250, 350, 425, 475, 525, 575, 650, 750, 900}, key=lambda v: abs(v - precipitatii))
+
     rez_dict = {}
     for c in culturi:
         rez_dict[c] = {}
         rez_dict[c]["alunecari"] = alunecari_dict.get(c, {}).get(alunecari, None)
         rez_dict[c]["panta"] = panta_dict.get(c, {}).get(panta, None)
+        rez_dict[c]["precipitatii"] = precip_dict.get(c, {}).get(temperatura_argument_precipitatii, {}).get(precipitatii_corectate, None)
         rez_dict[c]["salin_alcalin"] = salin_and_alc_dict.get(c, {}).get(salin_alcalin, None)
         rez_dict[c]["gleizare"] = gleuiz_dict.get(c, {}).get(drenaj_desecare, {}).get(gleizare, None)
         rez_dict[c]["pseoudoglizare"] = pseudogleiz_dict.get(c, {}).get(pseudogleizare, None)
